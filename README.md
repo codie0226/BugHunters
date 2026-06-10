@@ -1,3 +1,18 @@
+# Bug Hunters: 코드 생존 RPG
+
+A browser-playable single-player RPG where your CS knowledge is the weapon.
+Fight "bug monsters" by choosing the correct algorithm or data structure, earn XP, and level up.
+
+**Play it:** deploy to GitHub Pages (see below). **Tech:** React + Vite + TypeScript, no backend, `localStorage` saves.
+
+## GitHub Pages deployment note
+
+The deploy workflow (`.github/workflows/deploy.yml`) pushes `dist/` to GitHub Pages on every push to `main`.
+**Before the first deploy**, go to **Settings → Pages** in this repo and set the source to **"GitHub Actions"**.
+No code change is needed — this is a one-time repository configuration step.
+
+---
+
 # Automate Development with Agents
 
 A template repository for an agentic development workshop. It ships a complete,

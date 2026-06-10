@@ -39,4 +39,8 @@ An ADR stays `Proposed` until a branch that implements it is ready to merge.
 
 | Date | Title | Status |
 |------|-------|--------|
-| _none yet_ | | |
+| 2026-06-10 | [React + Vite + TypeScript for the MVP UI](./2026-06-10-react-vite-typescript.md) | Accepted |
+| 2026-06-10 | [localStorage as the only persistence layer in v1](./2026-06-10-localstorage-persistence.md) | Accepted |
+| 2026-06-10 | [Static-site hosting on GitHub Pages for the v1 demo](./2026-06-10-static-site-github-pages.md) | Accepted |
+| 2026-06-10 | [Multiple-choice answer combat (no code editor) in v1](./2026-06-10-multiple-choice-combat.md) | Accepted |
+| 2026-06-10 | [Author content as typed TypeScript modules, not raw JSON](./2026-06-10-content-as-typed-modules.md) | Accepted |

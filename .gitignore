@@ -1,2 +1,6 @@
 .claude/worktrees
 .env
+node_modules/
+dist/
+coverage/
+.vite/
