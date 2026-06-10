@@ -1,4 +1,5 @@
 import type { Monster } from '../game/types';
+import { t } from '../locale/strings';
 
 interface MonsterSpriteProps {
   monster: Monster;
@@ -6,7 +7,7 @@ interface MonsterSpriteProps {
 
 export function MonsterSprite({ monster }: MonsterSpriteProps) {
   return (
-    <div style={{ textAlign: 'center' }} aria-label={`몬스터: ${monster.name}`}>
+    <div style={{ textAlign: 'center' }} aria-label={t('monster.label').replace('{name}', monster.name)}>
       <div
         style={{
           fontSize: monster.isBoss ? '5rem' : '4rem',

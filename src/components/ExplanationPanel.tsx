@@ -30,7 +30,7 @@ export function ExplanationPanel({ turn, onContinue }: ExplanationPanelProps) {
   return (
     <div
       role="region"
-      aria-label="설명"
+      aria-label={t('panel.label')}
       style={{
         background: 'var(--color-surface)',
         border: `1px solid ${headlineColor(turn)}`,
@@ -65,7 +65,7 @@ export function ExplanationPanel({ turn, onContinue }: ExplanationPanelProps) {
         {turn.dmgTaken > 0 && (
           <span>🛡️ {t('combat.dmgTaken').replace('{dmg}', String(turn.dmgTaken))}</span>
         )}
-        {turn.dmgDealt === 0 && turn.dmgTaken === 0 && <span>데미지 없음</span>}
+        {turn.dmgDealt === 0 && turn.dmgTaken === 0 && <span>{t('combat.noDamage')}</span>}
       </div>
 
       <p style={{ lineHeight: 1.7 }}>{turn.explanation}</p>
@@ -90,9 +90,9 @@ export function ExplanationPanel({ turn, onContinue }: ExplanationPanelProps) {
         }}
       >
         {turn.playerDefeated
-          ? '패배 화면으로'
+          ? t('combat.toDefeat')
           : turn.monsterDefeated
-            ? '다음 전투로'
+            ? t('combat.toNext')
             : t('combat.next')}
       </button>
     </div>

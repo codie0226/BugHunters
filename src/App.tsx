@@ -63,8 +63,5 @@ function Router({ state, dispatch }: RouterProps) {
       return <VictoryScreen state={state} dispatch={dispatch} />;
     case 'defeat':
       return <DefeatScreen state={state} dispatch={dispatch} />;
-    case 'levelUp':
-      // levelUp screen is handled as a toast overlay, not a separate screen
-      return <CombatScreen state={state} dispatch={dispatch} />;
   }
 }

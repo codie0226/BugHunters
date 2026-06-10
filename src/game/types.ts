@@ -42,7 +42,7 @@ export interface PlayerState {
 
 export type MapNodeId = 'tutorialTown' | 'loopCaverns' | 'bossLair';
 
-export type Screen = 'title' | 'map' | 'encounter' | 'levelUp' | 'defeat' | 'victory';
+export type Screen = 'title' | 'map' | 'encounter' | 'defeat' | 'victory';
 
 export interface TurnResult {
   readonly playerHp: number;

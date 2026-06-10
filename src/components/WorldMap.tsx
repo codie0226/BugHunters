@@ -67,7 +67,7 @@ export function WorldMap({ state, dispatch }: WorldMapProps) {
                 disabled={!isUnlocked}
                 aria-disabled={!isUnlocked}
                 aria-current={isCurrent ? 'location' : undefined}
-                aria-label={`${t(node.labelKey)}${isCleared ? ' (완료)' : !isUnlocked ? ' (잠김)' : ''}`}
+                aria-label={`${t(node.labelKey)}${isCleared ? ` (${t('map.node.cleared')})` : !isUnlocked ? ` (${t('map.node.locked')})` : ''}`}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',

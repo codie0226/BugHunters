@@ -144,7 +144,7 @@ export function CombatScreen({ state, dispatch }: CombatScreenProps) {
         <>
           <div
             style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}
-            aria-label="정답 확인"
+            aria-label={t('combat.reviewLabel')}
           >
             {answers.map((ans, idx) => (
               <AnswerChoice

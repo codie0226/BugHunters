@@ -52,10 +52,14 @@ export function reducer(state: GameState, action: Action): GameState {
             monsterHp: getMonsterHpForEncounter(p.dungeonState.encounterIndex),
           }
         : null;
+      // Restore HP to encounterEntryHp when mid-encounter so a non-fatal turn's
+      // post-turn HP does not leak across reload (spec edge case AC-9).
+      // Landing screen is always 'map'; player re-enters the encounter from there.
+      const restoredHp = dungeonState ? dungeonState.encounterEntryHp : p.player.hp;
       return {
         ...state,
         screen: 'map',
-        player: p.player,
+        player: { ...p.player, hp: restoredHp },
         mapState: p.mapState,
         dungeonState,
         stats: p.stats,

@@ -190,4 +190,61 @@ describe('Integration: mid-encounter refresh (edge case)', () => {
     // Restored: encounterEntryHp equals what it was on entry
     expect(loaded.payload.dungeonState?.encounterEntryHp).toBe(entryHp);
   });
+
+  it('reload after non-fatal turn restores player.hp to encounterEntryHp (P1 regression)', () => {
+    // Spec edge case: "Player refreshes mid-encounter — HP as it was on entry; mid-turn state is not preserved."
+    let state = INITIAL_STATE;
+    state = reducer(state, { type: 'START_NEW_GAME' });
+    state = reducer(state, { type: 'ENTER_DUNGEON' });
+    state = reducer(state, { type: 'ENCOUNTER_ENTERED' });
+
+    const entryHp = state.dungeonState!.encounterEntryHp;
+
+    // Submit a non-fatal wrong answer so player takes damage but is not defeated
+    const enc0Id = LOOP_CAVERNS.encounterIds[0] as string;
+    const enc0 = ENCOUNTER_MAP[enc0Id]!;
+    const wrongAns = enc0.answers.find((a) => a.correctness === 'wrong')!;
+    state = reducer(state, { type: 'SUBMIT_ANSWER', answer: wrongAns });
+
+    // Verify non-fatal: player took damage but is alive
+    expect(state.player.hp).toBeLessThan(entryHp);
+    expect(state.player.hp).toBeGreaterThan(0);
+
+    // Advance the turn so the encounter continues (lastTurn cleared)
+    state = reducer(state, { type: 'ADVANCE_AFTER_TURN' });
+    expect(state.lastTurn).toBeNull();
+
+    // Save mid-encounter (as useGameState does after ADVANCE_AFTER_TURN)
+    const dungeonState = state.dungeonState
+      ? {
+          dungeonId: state.dungeonState.dungeonId,
+          encounterIndex: state.dungeonState.encounterIndex,
+          encounterEntryHp: state.dungeonState.encounterEntryHp,
+        }
+      : null;
+    const payload = buildSavePayload(
+      state.player,
+      state.mapState,
+      dungeonState,
+      state.stats,
+      state.tutorialDismissed,
+    );
+    writeSave(payload);
+
+    // Reload: CONTINUE_FROM_SAVE must restore hp to encounterEntryHp, not the post-turn hp
+    const loaded = loadSave();
+    expect(loaded.kind).toBe('ok');
+    if (loaded.kind !== 'ok') throw new Error();
+
+    let restoredState = INITIAL_STATE;
+    restoredState = reducer(restoredState, { type: 'CONTINUE_FROM_SAVE', payload: loaded.payload });
+
+    // HP must equal the encounter-entry HP, not the leaked post-turn HP
+    expect(restoredState.player.hp).toBe(entryHp);
+
+    // Re-entering the dungeon: encounterEntryHp should match the restored player.hp
+    restoredState = reducer(restoredState, { type: 'ENTER_DUNGEON' });
+    expect(restoredState.dungeonState!.encounterEntryHp).toBe(entryHp);
+    expect(restoredState.player.hp).toBe(entryHp);
+  });
 });

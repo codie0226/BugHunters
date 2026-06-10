@@ -1,4 +1,5 @@
 import type { Answer, Correctness } from '../game/types';
+import { t } from '../locale/strings';
 
 interface AnswerChoiceProps {
   answer: Answer;
@@ -15,11 +16,11 @@ const ICON: Record<Correctness, string> = {
   wrong: '✗',
 };
 
-const CORRECTNESS_LABEL: Record<Correctness, string> = {
-  optimal: '최적',
-  acceptable: '가능',
-  wrong: '오답',
-};
+function correctnessLabel(c: Correctness): string {
+  if (c === 'optimal') return t('combat.answerOptimal');
+  if (c === 'acceptable') return t('combat.answerAcceptable');
+  return t('combat.answerWrong');
+}
 
 function getBorderColor(correctness: Correctness): string {
   switch (correctness) {
@@ -100,7 +101,7 @@ export function AnswerChoice({ answer, index, submitted, onSelect, disabled }: A
               fontWeight: 600,
             }}
           >
-            ({CORRECTNESS_LABEL[answer.correctness]})
+            ({correctnessLabel(answer.correctness)})
           </span>
         )}
       </span>

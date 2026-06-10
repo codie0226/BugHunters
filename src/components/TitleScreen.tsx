@@ -64,7 +64,7 @@ export function TitleScreen({ state, dispatch }: TitleScreenProps) {
           {t('title.game')}
         </h1>
         <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-lg)' }}>
-          CS 지식으로 버그 몬스터를 물리쳐라!
+          {t('title.subtitle')}
         </p>
       </div>
 

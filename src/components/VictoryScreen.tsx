@@ -10,7 +10,7 @@ function formatTime(ms: number): string {
   const totalSec = Math.floor(ms / 1000);
   const min = Math.floor(totalSec / 60);
   const sec = totalSec % 60;
-  return `${min}분 ${sec}초`;
+  return t('victory.time').replace('{min}', String(min)).replace('{sec}', String(sec));
 }
 
 export function VictoryScreen({ state, dispatch }: VictoryScreenProps) {

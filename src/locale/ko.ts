@@ -65,6 +65,25 @@ export const ko = {
 
   'encounter.turn': '차례 {turn}',
   'encounter.code': '코드',
+
+  'combat.noDamage': '데미지 없음',
+  'combat.toDefeat': '패배 화면으로',
+  'combat.toNext': '다음 전투로',
+  'combat.reviewLabel': '정답 확인',
+  'combat.answerOptimal': '최적',
+  'combat.answerAcceptable': '가능',
+  'combat.answerWrong': '오답',
+
+  'title.subtitle': 'CS 지식으로 버그 몬스터를 물리쳐라!',
+
+  'monster.label': '몬스터: {name}',
+
+  'hp.player': '플레이어 HP',
+  'hp.monster': '몬스터 HP',
+
+  'panel.label': '설명',
+
+  'victory.time': '{min}분 {sec}초',
 } as const;
 
 export type StringId = keyof typeof ko;

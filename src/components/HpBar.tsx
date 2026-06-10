@@ -1,3 +1,5 @@
+import { t } from '../locale/strings';
+
 interface HpBarProps {
   current: number;
   max: number;
@@ -21,7 +23,7 @@ export function HpBar({ current, max, variant = 'player', label }: HpBarProps) {
         aria-valuenow={current}
         aria-valuemin={0}
         aria-valuemax={max}
-        aria-label={label ?? (variant === 'player' ? '플레이어 HP' : '몬스터 HP')}
+        aria-label={label ?? (variant === 'player' ? t('hp.player') : t('hp.monster'))}
         style={{
           height: '12px',
           background: 'var(--color-hp-track)',
